@@ -4,7 +4,6 @@ import 'izitoast/dist/css/iziToast.min.css';
 const form = document.querySelector('.form');
 const input = form.querySelector('[name="delay"]');
 const radioButtons = form.querySelectorAll('[name="state"]');
-const submitButton = form.querySelector('[type="submit"]');
 
 form.addEventListener('submit', function (e) {
   e.preventDefault();
@@ -13,15 +12,13 @@ form.addEventListener('submit', function (e) {
   const state = [...radioButtons].find(rb => rb.checked).value;
 
   const promise = new Promise((resolve, reject) => {
-    if (state === 'fulfilled') {
-      setTimeout(() => {
+    setTimeout(() => {
+      if (state === 'fulfilled') {
         resolve(delay);
-      }, delay);
-    } else if (state === 'rejected') {
-      setTimeout(() => {
+      } else if (state === 'rejected') {
         reject(delay);
-      }, delay);
-    }
+      }
+    }, delay);
   });
 
   promise
@@ -38,6 +35,5 @@ form.addEventListener('submit', function (e) {
       });
     });
 
-  input.value = '';
-  radioButtons.forEach(rb => (rb.checked = false));
+  form.reset();
 });

@@ -63,20 +63,19 @@ function startTimer() {
 
   const intervalId = setInterval(() => {
     let { days, hours, minutes, seconds } = convertMs(msDifference);
-    document.querySelector('[data-days]').textContent = addZeroOnStart(days);
-    document.querySelector('[data-hours]').textContent = addZeroOnStart(hours);
+    document.querySelector('[data-days]').textContent = addLeadingZero(days);
+    document.querySelector('[data-hours]').textContent = addLeadingZero(hours);
     document.querySelector('[data-minutes]').textContent =
-      addZeroOnStart(minutes);
+      addLeadingZero(minutes);
     document.querySelector('[data-seconds]').textContent =
-      addZeroOnStart(seconds);
+      addLeadingZero(seconds);
     if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
       clearInterval(intervalId);
-      dataStart.removeAttribute('disabled');
     }
     msDifference -= 1000;
   }, 1000);
 }
 
-function addZeroOnStart(value) {
+function addLeadingZero(value) {
   return value < 10 ? '0' + value : value;
 }
